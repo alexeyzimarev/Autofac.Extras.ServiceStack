@@ -6,7 +6,7 @@ namespace Autofac.Extras.ServiceStack
 {
     public static class ServiceStackAutofac
     {
-        public static ServiceStackHost UseAutofac(this ServiceStackHost appHost, IContainer container)
+        public static ServiceStackHost UseAutofac(this ServiceStackHost appHost, ILifetimeScope container)
         {
             appHost.Container.Adapter = new AutofacIocAdapter(container);
 
@@ -19,7 +19,7 @@ namespace Autofac.Extras.ServiceStack
             return appHost;
         }
 
-        private static void CreateScope(IContainer container)
+        private static void CreateScope(ILifetimeScope container)
         {
             var scope = container.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
             CallContext.LogicalSetData(Consts.AutofacScopeLogicalContextKey, scope);

@@ -5,12 +5,12 @@ namespace Autofac.Extras.ServiceStack
 {
     public class AutofacIocAdapter : IContainerAdapter
     {
-        public AutofacIocAdapter(IContainer container)
+        public AutofacIocAdapter(ILifetimeScope container)
         {
             Container = container;
         }
 
-        public IContainer Container { get; }
+        public ILifetimeScope Container { get; }
 
         public T Resolve<T>() 
             => GetCurrentContext().Resolve<T>();
