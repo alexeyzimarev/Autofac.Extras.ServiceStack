@@ -11,10 +11,10 @@ namespace Autofac.Extras.ServiceStack
             appHost.Container.Adapter = new AutofacIocAdapter(container);
 
             appHost.GlobalRequestFilters.Add((req, resp, dto) => CreateScope(container));
-            appHost.GlobalResponseFilters.Add((req, resp, dto) => DisposeScope());
+            appHost.OnEndRequestCallbacks.Add(req => DisposeScope());
 
             appHost.GlobalMessageRequestFilters.Add((req, resp, dto) => CreateScope(container));
-            appHost.GlobalMessageRequestFilters.Add((req, resp, dto) => DisposeScope());
+            appHost.GlobalMessageResponseFilters.Add((req, resp, dto) => DisposeScope());
             
             return appHost;
         }
